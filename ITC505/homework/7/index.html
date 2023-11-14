@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
             margin: 0;
             padding: 0;
             color: black;
-            background-image: url('background.jpg'); /* Set your background image here */
+            background-image: url('background.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -34,8 +35,8 @@
 
         #storyImage {
             width: 100%;
-            height: 100vh; /* 100% of the viewport height */
-            object-fit: cover; /* Maintain image aspect ratio while covering the container */
+            height: 100vh;
+            object-fit: cover;
             margin: 20px;
         }
 
@@ -46,13 +47,14 @@
         }
 
         footer {
-            color: white; /* Set the text color of the footer to white */
-            background-color: #333; /* Set the background color of the footer */
+            color: white;
+            background-color: #333;
             padding: 20px;
         }
     </style>
     <title>Adventure in Seoul with BTS</title>
 </head>
+
 <body>
     <header>
         <h1>Adventure in Seoul with BTS</h1>
@@ -65,7 +67,51 @@
     <img id="storyImage" />
     <script>
         const story = {
-            // ... (your story object)
+            start: {
+                text: "You find yourself in Seoul. BTS invites you on an adventure.",
+                choices: ["Join BTS for a concert", "Explore the city on your own"],
+                consequences: ["concert", "explore"],
+                images: ["concert.jpg", "explore.jpg"]
+            },
+            concert: {
+                text: "You had an amazing time at the concert with BTS!",
+                choices: ["Meet BTS backstage", "Go sightseeing with BTS"],
+                consequences: ["meetBackstage", "sightseeing"],
+                images: ["backstage.jpg", "sightseeing.jpg"]
+            },
+            explore: {
+                text: "You discover hidden gems in Seoul.",
+                choices: ["Visit historical sites", "Try local cuisine"],
+                consequences: ["historicalSites", "localCuisine"],
+                images: ["historical.jpg", "cuisine.jpg"]
+            },
+            meetBackstage: {
+                text: "You meet BTS backstage and have an unforgettable experience!",
+                choices: ["Express your gratitude"],
+                consequences: ["gratitude"],
+                images: ["gratitude.jpg"]
+            },
+            sightseeing: {
+                text: "You explore Seoul's landmarks with BTS. It's a day to remember!",
+                choices: ["Plan the next adventure"],
+                consequences: ["nextAdventure"],
+                images: ["nextAdventure.jpg"]
+            },
+            historicalSites: {
+                text: "You visit historical sites and learn about Seoul's rich culture.",
+                choices: [],
+                images: ["culture.jpg"]
+            },
+            localCuisine: {
+                text: "You try local cuisine and savor the flavors of Seoul.",
+                choices: [],
+                images: ["flavors.jpg"]
+            },
+            ending1: {
+                text: "This is ending 1. Your adventure comes to an end.",
+                choices: ["Restart"],
+                images: ["ending1.jpg"]
+            }
         };
 
         let currentState = "start";
@@ -73,7 +119,7 @@
         function startGame() {
             currentState = "start";
             updatePage();
-            document.body.style.backgroundImage = 'none'; // Remove background image
+            document.body.style.backgroundImage = 'none';
         }
 
         function updatePage() {
@@ -92,11 +138,9 @@
             const storyImage = document.getElementById("storyImage");
             storyImage.src = stage.images[Math.floor(Math.random() * stage.images.length)];
 
-            // Set the image height to 100% of the viewport height for the "Express your gratitude" stage
             if (currentState === "meetBackstage") {
                 storyImage.style.height = "100vh";
             } else {
-                // Reset height for other stages
                 storyImage.style.height = "auto";
             }
         }
@@ -105,14 +149,14 @@
             currentState = story[currentState].consequences[index];
             updatePage();
 
-            if (currentState.startsWith("ending")) {
-                endGame();
-            }
-
             if (currentState === "concert") {
                 document.getElementById("storyImage").src = story.concert.images[0];
             } else if (currentState === "explore") {
                 document.getElementById("storyImage").src = story.explore.images[0];
+            }
+
+            if (currentState.startsWith("ending")) {
+                endGame();
             }
         }
 
@@ -127,7 +171,7 @@
     </script>
     <footer>
         <p>
-            Addendum: 
+            Addendum:
             <br>
             During the development of this adventure:
             <ul>
@@ -153,4 +197,5 @@
         </p>
     </footer>
 </body>
+
 </html>
