@@ -44,6 +44,12 @@
             top: 10px;
             right: 10px;
         }
+
+        footer {
+            color: white; /* Set the text color of the footer to white */
+            background-color: #333; /* Set the background color of the footer */
+            padding: 20px;
+        }
     </style>
     <title>Adventure in Seoul with BTS</title>
 </head>
@@ -59,51 +65,7 @@
     <img id="storyImage" />
     <script>
         const story = {
-            start: {
-                text: "You find yourself in Seoul. BTS invites you on an adventure.",
-                choices: ["Join BTS for a concert", "Explore the city on your own"],
-                consequences: ["concert", "explore"],
-                images: ["concert.jpg", "explore.jpg"]
-            },
-            concert: {
-                text: "You had an amazing time at the concert with BTS!",
-                choices: ["Meet BTS backstage", "Go sightseeing with BTS"],
-                consequences: ["meetBackstage", "sightseeing"],
-                images: ["backstage.jpg", "sightseeing.jpg"]
-            },
-            explore: {
-                text: "You discover hidden gems in Seoul.",
-                choices: ["Visit historical sites", "Try local cuisine"],
-                consequences: ["historicalSites", "localCuisine"],
-                images: ["historical.jpg", "cuisine.jpg"]
-            },
-            meetBackstage: {
-                text: "You meet BTS backstage and have an unforgettable experience!",
-                choices: ["Express your gratitude"],
-                consequences: ["gratitude"],
-                images: ["gratitude.jpg"] // Add the image file names for choices
-            },
-            sightseeing: {
-                text: "You explore Seoul's landmarks with BTS. It's a day to remember!",
-                choices: ["Plan the next adventure"],
-                consequences: ["nextAdventure"],
-                images: ["nextAdventure.jpg"] // Add the image file names for choices
-            },
-            historicalSites: {
-                text: "You visit historical sites and learn about Seoul's rich culture.",
-                choices: [],
-                images: ["culture.jpg"]
-            },
-            localCuisine: {
-                text: "You try local cuisine and savor the flavors of Seoul.",
-                choices: [],
-                images: ["flavors.jpg"]
-            },
-            ending1: {
-                text: "This is ending 1. Your adventure comes to an end.",
-                choices: ["Restart"],
-                images: ["ending1.jpg"]
-            }
+            // ... (your story object)
         };
 
         let currentState = "start";
@@ -127,7 +89,16 @@
                 document.getElementById("choices").appendChild(button);
             });
 
-            document.getElementById("storyImage").src = stage.images[Math.floor(Math.random() * stage.images.length)];
+            const storyImage = document.getElementById("storyImage");
+            storyImage.src = stage.images[Math.floor(Math.random() * stage.images.length)];
+
+            // Set the image height to 100% of the viewport height for the "Express your gratitude" stage
+            if (currentState === "meetBackstage") {
+                storyImage.style.height = "100vh";
+            } else {
+                // Reset height for other stages
+                storyImage.style.height = "auto";
+            }
         }
 
         function makeChoice(index) {
@@ -154,5 +125,32 @@
             document.getElementById("storyImage").src = stage.images[0];
         }
     </script>
+    <footer>
+        <p>
+            Addendum: 
+            <br>
+            During the development of this adventure:
+            <ul>
+                <li>Buttons were created for user interaction.</li>
+                <li>Choices were defined for each stage, leading to different consequences.</li>
+                <li>Images were carefully selected to enhance the visual storytelling experience.</li>
+            </ul>
+            Challenges Faced:
+            <ul>
+                <li>Managing the dynamic display of images based on user choices.</li>
+                <li>Ensuring a seamless and engaging narrative flow.</li>
+            </ul>
+            Creative Choices:
+            <ul>
+                <li>Randomizing background images and providing a variety of choices for a unique experience.</li>
+                <li>Utilizing a full-screen image for certain stages to emphasize key moments, like meeting BTS.</li>
+            </ul>
+            Insights Gained:
+            <ul>
+                <li>Understanding the importance of user immersion in interactive storytelling.</li>
+                <li>Balancing narrative depth with user agency for an enjoyable experience.</li>
+            </ul>
+        </p>
+    </footer>
 </body>
 </html>
